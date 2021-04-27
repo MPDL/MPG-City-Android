@@ -1,0 +1,6 @@
+<resources>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="img_width">200px</dimen>
+    <dimen name="img_width_half">100px</dimen>
+
+</resources>
