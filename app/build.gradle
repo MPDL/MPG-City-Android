@@ -86,7 +86,7 @@ dependencies {
     // leakcanary
     debugImplementation "com.squareup.leakcanary:leakcanary-android:$leakcanary_version"
     releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$leakcanary_version"
-//
+
 
     // Provides ARCore Session and related resources.
     implementation 'com.google.ar:core:1.15.0'
