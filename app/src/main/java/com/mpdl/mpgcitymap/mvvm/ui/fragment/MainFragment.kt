@@ -71,7 +71,7 @@ class MainFragment : BaseFragment<MainViewModel>(), Scene.OnUpdateListener, View
         cityItemList.add(CustomItem(R.id.item2,R.mipmap.city_map_2,1,1,"https://www.mpg.de/adminhq"))
         cityItemList.add(CustomItem(R.id.item3,R.mipmap.city_map_3,1,0,"https://www.mpdl.mpg.de/en"))
         cityItemList.add(CustomItem(R.id.item3_1,R.mipmap.city_map_3_1,2,0,"https://mpdl-services.de/"))
-        cityItemList.add(CustomItem(R.id.item4,R.mipmap.city_map_4,1,-1,"http://docs.google.com/gview?url=https://www.mpg.de/197521/statutesMPS.pdf"))
+        cityItemList.add(CustomItem(R.id.item4,R.mipmap.city_map_4,1,-1,"file:///android_asset/pdf_js/web/viewer.html?file=https://www.mpg.de/197521/statutesMPS.pdf"))
         cityItemList.add(CustomItem(R.id.item5,R.mipmap.city_map_5,-1,-1,"https://www.archiv-berlin.mpg.de/2523/en"))
         cityItemList.add(CustomItem(R.id.item6,R.mipmap.city_map_6,-2,0,2,"item_6_content.jpg"))
         cityItemList.add(CustomItem(R.id.item7,R.mipmap.city_map_7,-3,1,"https://www.mpg.de/about-us/governing-bodies"))

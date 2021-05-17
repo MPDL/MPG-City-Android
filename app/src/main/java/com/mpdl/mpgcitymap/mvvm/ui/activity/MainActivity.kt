@@ -56,6 +56,7 @@ class MainActivity : BaseActivity<MainViewModel>(){
             webView.settings.domStorageEnabled = true
             webView.settings.loadWithOverviewMode = true
             webView.settings.useWideViewPort = true
+            webView.settings.allowUniversalAccessFromFileURLs = true
             webView.settings.cacheMode = WebSettings.LOAD_CACHE_ELSE_NETWORK
             webView.webViewClient = WebViewClient()
             urlMap[url] = webView
