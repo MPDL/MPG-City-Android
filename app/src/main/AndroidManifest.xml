@@ -30,6 +30,8 @@
         <activity
             android:name=".mvvm.ui.activity.MainActivity"
             android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:hardwareAccelerated="true"
             android:theme="@style/Theme.MPGCityMap.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
