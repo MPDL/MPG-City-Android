@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.res.Configuration
 import android.view.Gravity
 import android.view.View
+import android.view.ViewGroup
 import android.view.WindowManager
 import android.webkit.WebChromeClient
 import android.webkit.WebView
@@ -49,12 +50,15 @@ class WebDialog(context: Context) : AlertDialog(context) {
 
         override fun create(): WebDialog {
             val dialog = WebDialog(context)
+            val wm = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
+            val height = wm.defaultDisplay.height - (wm.defaultDisplay.height*0.2).toInt()
 
             webPopupRootView = View.inflate(context, R.layout.popup_web,null) as LinearLayout
             webProgressBar = webPopupRootView.findViewById(R.id.progressbar_web)
             webParent = webPopupRootView.findViewById(R.id.web_parent)
 
             val webView = MainActivity.createWebView(url!!,context)
+            webView.layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,height)
             webParent?.addView(webView)
             webView.webChromeClient = object : WebChromeClient(){
                 override fun onProgressChanged(view: WebView?, newProgress: Int) {
