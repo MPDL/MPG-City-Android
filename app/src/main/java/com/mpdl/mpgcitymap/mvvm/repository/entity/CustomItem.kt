@@ -1,7 +1,7 @@
 package com.mpdl.mpgcitymap.mvvm.repository.entity
 
 class CustomItem {
-    var type :Int//0 webView /1 dialog
+    var type :Int//0 webView /1 webDialog/ 2 imageDialog
     var url = ""
     var email = ""
     var telephone = ""
@@ -25,7 +25,11 @@ class CustomItem {
         this.x = x
         this.y = y
         this.type = type
-        this.url = "file:///android_asset/$assetName"
+        if (type == 2){
+            this.url = "file:///android_asset/$assetName"
+        }else{
+            this.url = assetName
+        }
     }
 
 

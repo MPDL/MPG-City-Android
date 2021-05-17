@@ -5,36 +5,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-
-    <LinearLayout
-        android:background="@color/white"
-        android:layout_width="match_parent"
-        android:paddingLeft="13dp"
-        android:paddingRight="13dp"
-        android:gravity="center_vertical"
-        android:layout_height="80px">
-        <TextView
-            android:id="@+id/tv_title"
-            android:textSize="36px"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-
-        <TextView
-            android:id="@+id/tv_close"
-            android:text="X"
-            android:textSize="40px"
-            android:paddingLeft="30px"
-            android:paddingRight="30px"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-
-    </LinearLayout>
-
     <ProgressBar
         android:id="@+id/progressbar_web"
         style="@android:style/Widget.ProgressBar.Horizontal"
