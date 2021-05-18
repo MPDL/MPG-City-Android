@@ -3,7 +3,30 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/MainFragment">
+    app:startDestination="@id/launchFragment">
+
+    <fragment
+        android:id="@+id/launchFragment"
+        android:name="com.mpdl.mpgcitymap.mvvm.ui.fragment.LaunchFragment"
+        android:label="LaunchFragment"
+        tools:layout="@layout/fragment_launch">
+        <action
+            android:id="@+id/action_launchFragment_to_guideFragment"
+            app:destination="@id/guideFragment" />
+        <action
+            android:id="@+id/action_launchFragment_to_MainFragment"
+            app:destination="@id/MainFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/guideFragment"
+        android:name="com.mpdl.mpgcitymap.mvvm.ui.fragment.GuideFragment"
+        android:label="GuideFragment"
+        tools:layout="@layout/fragment_guide">
+        <action
+            android:id="@+id/action_guideFragment_to_MainFragment"
+            app:destination="@id/MainFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/MainFragment"
