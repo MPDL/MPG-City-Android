@@ -4,15 +4,15 @@
     "type": "APK",
     "kind": "Directory"
   },
-  "applicationId": "com.mpdl.mpgcitymap",
+  "applicationId": "de.mpg.mpdl.mpgcity",
   "variantName": "processReleaseResources",
   "elements": [
     {
       "type": "SINGLE",
       "filters": [],
-      "versionCode": 103,
-      "versionName": "1.0.3",
-      "outputFile": "release_v1.0.3.apk"
+      "versionCode": 104,
+      "versionName": "1.0.4",
+      "outputFile": "release_v1.0.4.apk"
     }
   ]
 }
