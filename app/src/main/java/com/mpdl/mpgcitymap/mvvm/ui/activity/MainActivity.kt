@@ -1,24 +1,18 @@
 package com.mpdl.mpgcitymap.mvvm.ui.activity
 
+import android.annotation.SuppressLint
 import android.content.Context
-import android.content.res.Configuration
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
-import android.view.View
 import android.view.ViewGroup
-import android.webkit.WebChromeClient
+import android.view.WindowManager
 import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.LinearLayout
-import android.widget.Toast
 import com.fyt.mvvm.base.BaseActivity
-import com.google.ar.core.AugmentedImage
-import com.google.ar.core.TrackingState
-import com.google.ar.sceneform.FrameTime
-import com.google.ar.sceneform.Scene
-import com.google.ar.sceneform.ux.ArFragment
 import com.mpdl.mpgcitymap.R
-import com.mpdl.mpgcitymap.mvvm.ui.fragment.CustomArFragment
 import com.mpdl.mpgcitymap.mvvm.viewmodel.MainViewModel
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 import java.util.*
@@ -29,7 +23,16 @@ class MainActivity : BaseActivity<MainViewModel>(){
 
     override fun initView(savedInstanceState: Bundle?): Int = R.layout.activity_main
 
-    override fun initData(savedInstanceState: Bundle?) {}
+    override fun initData(savedInstanceState: Bundle?) {
+        window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,  WindowManager.LayoutParams.FLAG_FULLSCREEN);
+    }
+
+    @SuppressLint("RestrictedApi")
+    override fun onBackPressed() {
+        val home = Intent(Intent.ACTION_MAIN)
+        home.addCategory(Intent.CATEGORY_HOME)
+        startActivity(home)
+    }
 
     companion object{
         var SCAN_IMAGE_NAMES = listOf("scan_it",
@@ -61,6 +64,10 @@ class MainActivity : BaseActivity<MainViewModel>(){
             webView.webViewClient = WebViewClient()
             urlMap[url] = webView
             return webView
+        }
+
+        fun getRawUri(context: Context,res: Int): Uri {
+            return Uri.parse("android.resource://" + context.packageName+ "/" + res)
         }
     }
 }
