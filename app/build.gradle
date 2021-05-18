@@ -8,7 +8,7 @@ android {
     buildToolsVersion "30.0.2"
 
     defaultConfig {
-        applicationId "com.mpdl.mpgcitymap"
+        applicationId "de.mpg.mpdl.mpgcity"
         minSdkVersion 18
         targetSdkVersion 30
         versionCode 103
