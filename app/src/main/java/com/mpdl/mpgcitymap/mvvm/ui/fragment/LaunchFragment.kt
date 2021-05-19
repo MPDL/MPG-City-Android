@@ -4,12 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
 import com.fyt.mvvm.common.Preference
 import com.mpdl.mpgcitymap.BuildConfig
 import com.mpdl.mpgcitymap.R
+import com.mpdl.mpgcitymap.mvvm.ui.activity.MainActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -23,6 +25,9 @@ class LaunchFragment : Fragment(){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        if (MainActivity.isPad()){
+            view.findViewById<ImageView>(R.id.iv_splash).setImageResource(R.mipmap.splash_4_3)
+        }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -30,11 +35,11 @@ class LaunchFragment : Fragment(){
         lifecycleScope.launch {
             delay(1300)
             withContext(Dispatchers.Main){
-                if (BuildConfig.VERSION_NAME == Preference.preferences.getString("version","")){
-                    Navigation.findNavController(requireView()).navigate(R.id.action_launchFragment_to_MainFragment)
-                }else{
+//                if (BuildConfig.VERSION_NAME == Preference.preferences.getString("version","")){
+//                    Navigation.findNavController(requireView()).navigate(R.id.action_launchFragment_to_MainFragment)
+//                }else{
                     Navigation.findNavController(requireView()).navigate(R.id.action_launchFragment_to_guideFragment)
-                }
+//                }
             }
         }
     }

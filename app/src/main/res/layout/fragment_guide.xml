@@ -3,14 +3,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    
+
     <VideoView
         android:id="@+id/video_view"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
     
     <TextView
         android:id="@+id/btn_go"
+        android:visibility="gone"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -18,10 +20,18 @@
         android:background="@drawable/bg_guide_button"
         android:textColor="@color/white"
         android:text="Let's go"
-        android:textSize="18sp"
-        android:layout_marginBottom="290px"
-        android:layout_width="555px"
-        android:layout_height="150px"/>
-    
+        android:textSize="12sp"
+        android:layout_marginBottom="88dp"
+        android:layout_width="173dp"
+        android:layout_height="43dp"/>
+
+    <ImageView
+        android:id="@+id/iv_splash"
+        android:scaleType="fitXY"
+        android:src="@mipmap/splash_16_9"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
