@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.DisplayMetrics
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.webkit.WebSettings
@@ -15,16 +16,29 @@ import com.fyt.mvvm.base.BaseActivity
 import com.mpdl.mpgcitymap.R
 import com.mpdl.mpgcitymap.mvvm.viewmodel.MainViewModel
 import org.koin.androidx.viewmodel.ext.android.getViewModel
+import timber.log.Timber
 import java.util.*
+import kotlin.Boolean as Boolean
 
 class MainActivity : BaseActivity<MainViewModel>(){
+
 
     override fun initViewModel(): MainViewModel = getViewModel()
 
     override fun initView(savedInstanceState: Bundle?): Int = R.layout.activity_main
 
     override fun initData(savedInstanceState: Bundle?) {
-        window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,  WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,  WindowManager.LayoutParams.FLAG_FULLSCREEN)
+        val metric = DisplayMetrics()
+        val mWindowManager: WindowManager =
+            this.getSystemService(Context.WINDOW_SERVICE) as WindowManager
+        mWindowManager.defaultDisplay.getMetrics(metric)
+        val width: Int = metric.widthPixels
+        val height: Int = metric.heightPixels
+
+        isPad = height/width.toDouble() < 1.4
+        Timber.d("height$height/width$width=${height/width.toDouble()}")
+
     }
 
     @SuppressLint("RestrictedApi")
@@ -35,6 +49,7 @@ class MainActivity : BaseActivity<MainViewModel>(){
     }
 
     companion object{
+        private var isPad: Boolean = false
         var SCAN_IMAGE_NAMES = listOf("scan_it",
             "scan_it_01","scan_it_02","scan_it_03","scan_it_04",
             "scan_it_05","scan_it_06","scan_it_07","scan_it_08",
@@ -68,6 +83,10 @@ class MainActivity : BaseActivity<MainViewModel>(){
 
         fun getRawUri(context: Context,res: Int): Uri {
             return Uri.parse("android.resource://" + context.packageName+ "/" + res)
+        }
+
+        fun isPad():Boolean{
+            return isPad
         }
     }
 }

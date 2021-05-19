@@ -17,6 +17,7 @@
     <style name="Theme.MPGCityMap.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="android:windowBackground">@mipmap/splash_16_9</item>
     </style>
 
     <style name="Theme.MPGCityMap.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />

@@ -8,6 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.lifecycle.lifecycleScope
 import com.fyt.mvvm.base.BaseFragment
 import com.google.ar.core.AugmentedImage
 import com.google.ar.core.Pose
@@ -26,6 +27,8 @@ import com.mpdl.mpgcitymap.mvvm.ui.activity.MainActivity
 import com.mpdl.mpgcitymap.mvvm.ui.widget.ImageDialog
 import com.mpdl.mpgcitymap.mvvm.ui.widget.WebDialog
 import com.mpdl.mpgcitymap.mvvm.viewmodel.MainViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 import timber.log.Timber
 import java.util.function.Consumer
@@ -58,7 +61,9 @@ class MainFragment : BaseFragment<MainViewModel>(), Scene.OnUpdateListener, View
         arFragment?.planeDiscoveryController?.hide()
         arFragment?.arSceneView?.scene?.addOnUpdateListener(this)
 
-        initListCity()
+        lifecycleScope.launch(Dispatchers.IO){
+            initListCity()
+        }
     }
 
 
