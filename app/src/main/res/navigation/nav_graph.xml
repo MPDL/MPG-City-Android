@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/launchFragment"
-        android:name="com.mpdl.mpgcitymap.mvvm.ui.fragment.LaunchFragment"
+        android:name="de.mpg.mpdl.mpgcity.mvvm.ui.fragment.LaunchFragment"
         android:label="LaunchFragment"
         tools:layout="@layout/fragment_launch">
         <action
@@ -20,7 +20,7 @@
 
     <fragment
         android:id="@+id/guideFragment"
-        android:name="com.mpdl.mpgcitymap.mvvm.ui.fragment.GuideFragment"
+        android:name="de.mpg.mpdl.mpgcity.mvvm.ui.fragment.GuideFragment"
         android:label="GuideFragment"
         tools:layout="@layout/fragment_guide">
         <action
@@ -30,7 +30,7 @@
 
     <fragment
         android:id="@+id/MainFragment"
-        android:name="com.mpdl.mpgcitymap.mvvm.ui.fragment.MainFragment"
+        android:name="de.mpg.mpdl.mpgcity.mvvm.ui.fragment.MainFragment"
         android:label="@string/second_fragment_label"
         tools:layout="@layout/fragment_main">
     </fragment>
