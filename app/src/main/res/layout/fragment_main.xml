@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/sceneform_fragment"
-        android:name="com.mpdl.mpgcitymap.mvvm.ui.fragment.CustomArFragment"
+        android:name="de.mpg.mpdl.mpgcity.mvvm.ui.fragment.CustomArFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
