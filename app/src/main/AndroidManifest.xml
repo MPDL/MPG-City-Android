@@ -39,6 +39,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".mvvm.ui.activity.DialogActivity"
+            android:configChanges="orientation|screenSize"
+            android:theme="@style/Theme.MPGCityMap.Dialog" />
 
         <meta-data
             android:name="com.google.ar.core"

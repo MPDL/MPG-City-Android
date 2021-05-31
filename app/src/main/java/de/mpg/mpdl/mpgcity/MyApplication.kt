@@ -31,7 +31,7 @@ class MyApplication: Application() {
         }
         Preference.setContext(applicationContext)
 
-        CrashReport.initCrashReport(applicationContext, "766677e0eb", BuildConfig.DEBUG)
+        CrashReport.initCrashReport(applicationContext, BuildConfig.BUGLY_APP_ID, BuildConfig.DEBUG)
 
     }
 

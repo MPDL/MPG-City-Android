@@ -1,14 +1,18 @@
 package de.mpg.mpdl.mpgcity.mvvm.ui.fragment
 
+import android.content.Intent
 import android.content.res.Configuration
 import android.os.Build
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.Navigation
 import com.google.ar.core.AugmentedImage
 import com.google.ar.core.Pose
 import com.google.ar.core.TrackingState
@@ -23,10 +27,11 @@ import com.google.ar.sceneform.ux.ArFragment
 import de.fyt.mvvm.base.BaseFragment
 import de.mpg.mpdl.mpgcity.R
 import de.mpg.mpdl.mpgcity.mvvm.repository.entity.CustomItem
+import de.mpg.mpdl.mpgcity.mvvm.ui.activity.DialogActivity
 import de.mpg.mpdl.mpgcity.mvvm.ui.activity.MainActivity
 import de.mpg.mpdl.mpgcity.mvvm.ui.widget.ImageDialog
-import de.mpg.mpdl.mpgcity.mvvm.ui.widget.VideoDialog
 import de.mpg.mpdl.mpgcity.mvvm.ui.widget.WebDialog
+import de.mpg.mpdl.mpgcity.mvvm.ui.widget.YutubeVideoDialog
 import de.mpg.mpdl.mpgcity.mvvm.viewmodel.MainViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -55,7 +60,7 @@ class MainFragment : BaseFragment<MainViewModel>(), Scene.OnUpdateListener, View
 
     private var webDialog: WebDialog? = null
     private var imageDialog: ImageDialog? = null
-    private var videoDialog: VideoDialog? = null
+    private var videoDialog: YutubeVideoDialog? = null
 
 
 
@@ -63,6 +68,7 @@ class MainFragment : BaseFragment<MainViewModel>(), Scene.OnUpdateListener, View
 
         arFragment = childFragmentManager.findFragmentById(R.id.sceneform_fragment) as CustomArFragment
         arFragment?.planeDiscoveryController?.hide()
+        arFragment?.retainInstance = true
         arFragment?.arSceneView?.scene?.addOnUpdateListener(this)
 
         lifecycleScope.launch(Dispatchers.IO){
@@ -107,6 +113,8 @@ class MainFragment : BaseFragment<MainViewModel>(), Scene.OnUpdateListener, View
         cityItemList.add(CustomItem(R.id.item26,R.mipmap.city_map_26,-1,-3,"https://mpgcityweek.mpdl.mpg.de/mpg-queer/"))
         cityItemList.add(CustomItem(R.id.item27,R.mipmap.city_map_27,-5,-1,"https://www.dkrz.de/dkrz-partner-for-climate-research?set_language=en&cl=en"))
         cityItemList.add(CustomItem(R.id.item28,R.mipmap.city_map_28,-6,0,"https://mpgcityweek.mpdl.mpg.de/mpg-city-service/"))
+        cityItemList.add(CustomItem(R.id.item28,R.mipmap.city_map_29,0,4,"https://mpgcityweek.mpdl.mpg.de/scientific-staff/"))
+
 
 
         var lengthX: Int
@@ -158,6 +166,7 @@ class MainFragment : BaseFragment<MainViewModel>(), Scene.OnUpdateListener, View
 
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
+        arFragment?.onResume()
         webDialog?.let {
             if (it.isShowing){
                 it.show()
@@ -171,6 +180,7 @@ class MainFragment : BaseFragment<MainViewModel>(), Scene.OnUpdateListener, View
 
         videoDialog?.let {
             if (it.isShowing){
+                arFragment?.onPause()
                 it.show(newConfig)
             }
         }
@@ -297,10 +307,16 @@ class MainFragment : BaseFragment<MainViewModel>(), Scene.OnUpdateListener, View
             videoDialog?.dismiss()
             videoDialog = null
         }
-        videoDialog = VideoDialog.VideoDialogBuilder(requireContext())
+        videoDialog = YutubeVideoDialog.VideoDialogBuilder(requireContext())
             .setUrl(item.url)
             .setRatio(item.contentRatio)
+            .setDismissListener(object : YutubeVideoDialog.DismissListener{
+                override fun onDismiss() {
+                    arFragment?.onResume()
+                }
+            })
             .create()
+        arFragment?.arSceneView?.pause()
         videoDialog?.show()
     }
 
@@ -320,7 +336,9 @@ class MainFragment : BaseFragment<MainViewModel>(), Scene.OnUpdateListener, View
                         createImageDialog(item)
                     }
                     3->{
-                        createVideoDialog(item)
+                        val intent = Intent(requireActivity(),DialogActivity::class.java)
+                        intent.putExtra("videoId",MainActivity.getVideoIdByUrl(item.url))
+                        startActivity(intent)
                     }
                 }
             }

@@ -5,7 +5,6 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.DisplayMetrics
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.webkit.WebSettings
@@ -18,6 +17,8 @@ import de.mpg.mpdl.mpgcity.mvvm.viewmodel.MainViewModel
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 import timber.log.Timber
 import java.util.*
+import java.util.regex.Matcher
+import java.util.regex.Pattern
 
 class MainActivity : BaseActivity<MainViewModel>(){
 
@@ -56,7 +57,7 @@ class MainActivity : BaseActivity<MainViewModel>(){
         var windowWidth = 0
         var windowHeight = 0
         var windowRatio:Double = 1.0
-        var videoRatio = 4.0/3.0
+        var videoRatio = 16.0/9.0
 
 
         private val urlMap = HashMap<String,WebView>()
@@ -89,6 +90,19 @@ class MainActivity : BaseActivity<MainViewModel>(){
 
         fun isPad():Boolean{
             return isPad
+        }
+
+        fun getVideoIdByUrl(url:String):String{
+            val pattern = "https?:\\/\\/(?:[0-9A-Z-]+\\.)?(?:youtu\\.be\\/|youtube\\.com\\S*[^\\w\\-\\s])([\\w\\-]{11})(?=[^\\w\\-]|$)(?![?=&+%\\w]*(?:['\"][^<>]*>|<\\/a>))[?=&+%\\w]*"
+
+            val compiledPattern: Pattern = Pattern.compile(
+                pattern,
+                Pattern.CASE_INSENSITIVE
+            )
+            val matcher: Matcher = compiledPattern.matcher(url)
+            return if (matcher.find()) {
+                matcher.group(1)
+            } else ""
         }
     }
 }

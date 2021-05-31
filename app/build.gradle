@@ -33,10 +33,19 @@ android {
             zipAlignEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
+
+            buildConfigField "String", "BUGLY_APP_ID", rootProject.ext.mpg_config["bugly-app-id"]
+            buildConfigField "String", "YOUTUBE_API_KEY", rootProject.ext.mpg_config["youtube_api_key"]
+
+
         }
         debug{
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+
+            buildConfigField "String", "BUGLY_APP_ID", rootProject.ext.mpg_config["bugly-app-id"]
+            buildConfigField "String", "YOUTUBE_API_KEY", rootProject.ext.mpg_config["youtube_api_key"]
+
         }
     }
     compileOptions {
@@ -97,5 +106,8 @@ dependencies {
 
     //Bugly
     implementation 'com.tencent.bugly:crashreport:latest.release'
+
+    implementation 'com.pierfrancescosoffritti.androidyoutubeplayer:core:10.0.5'
+
 
 }

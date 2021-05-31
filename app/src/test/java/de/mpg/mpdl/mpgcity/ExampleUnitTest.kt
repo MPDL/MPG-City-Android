@@ -1,5 +1,6 @@
 package de.mpg.mpdl.mpgcity
 
+import de.mpg.mpdl.mpgcity.mvvm.ui.activity.MainActivity
 import org.junit.Test
 
 import org.junit.Assert.*
@@ -12,6 +13,6 @@ import org.junit.Assert.*
 class ExampleUnitTest {
     @Test
     fun addition_isCorrect() {
-        assertEquals(4, 2 + 2)
+        println("videoId: "+MainActivity.getVideoIdByUrl("https://www.youtube.com/watch?v=X2yDs5FHDok&feature=youtu.be"))
     }
 }
